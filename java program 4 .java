@@ -1,4 +1,3 @@
-//4
 import java.util.Scanner;
 
 public class Main {
@@ -7,13 +6,17 @@ public class Main {
 
         System.out.print("Enter size of array: ");
         int n = sc.nextInt();
+        sc.nextLine();
 
         int[] nums = new int[n];
 
         System.out.println("Enter " + n + " elements:");
+        String input = sc.nextLine();
+
+        String[] values = input.split(",");
 
         for (int i = 0; i < n; i++) {
-            nums[i] = sc.nextInt();
+            nums[i] = Integer.parseInt(values[i].trim());
         }
 
         int currentSum = nums[0];
