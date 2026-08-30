@@ -1,0 +1,28 @@
+import java.util.Scanner;
+
+class Employee {
+    int employeeId;
+    String name;
+
+    Employee(int employeeId, String name) {
+        this.employeeId = employeeId;
+        this.name = name;
+    }
+
+    void display() {
+        System.out.println("Employee Record Updated");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int id = sc.nextInt();
+        sc.nextLine();
+        String name = sc.nextLine();
+
+        Employee emp = new Employee(id, name);
+        emp.display();
+    }
+}
