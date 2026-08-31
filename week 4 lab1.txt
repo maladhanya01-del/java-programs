@@ -1,0 +1,119 @@
+
+import java.util.Scanner;
+
+class Patient {
+
+    private int patientId;
+    private String patientName;
+    private int age;
+    private String diagnosis;
+
+    static String hospitalName = "Apollo Hospitals";
+    final int MAX_PATIENTS = 100;
+
+    Patient(int patientId, String patientName, int age, String diagnosis) {
+        this.patientId = patientId;
+        this.patientName = patientName;
+        this.age = age;
+        this.diagnosis = diagnosis;
+    }
+
+    public int getPatientId() {
+        return patientId;
+    }
+
+    public String getPatientName() {
+        return patientName;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public String getDiagnosis() {
+        return diagnosis;
+    }
+
+    public void setDiagnosis(String diagnosis) {
+        this.diagnosis = diagnosis;
+    }
+
+    public void displayDetails() {
+        System.out.println("Patient ID    : " + patientId);
+        System.out.println("Patient Name  : " + patientName);
+        System.out.println("Age           : " + age);
+        System.out.println("Diagnosis     : " + diagnosis);
+        System.out.println("Hospital Name : " + hospitalName);
+    }
+}
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        // Patient 1
+        int id1 = sc.nextInt();
+        String name1 = sc.next();
+        int age1 = sc.nextInt();
+        String diagnosis1 = sc.next();
+
+        if (age1 < 1 || age1 > 100) {
+
+            System.out.println("Invalid Age");
+
+        } else {
+
+            Patient p1 = new Patient(id1, name1, age1, diagnosis1);
+
+            System.out.println("Patient Record Created");
+
+            // Update patient 1
+            int updateId = sc.nextInt();
+            String updateName = sc.next();
+            int updateAge = sc.nextInt();
+            String newDiagnosis = sc.next();
+
+            if (p1.getPatientId() == updateId) {
+
+                p1.setDiagnosis(newDiagnosis);
+
+                System.out.println("Patient Record Updated");
+            }
+
+            // Patient 2
+            int id2 = sc.nextInt();
+            String name2 = sc.next();
+            int age2 = sc.nextInt();
+            String diagnosis2 = sc.next();
+
+            if (age2 < 1 || age2 > 100) {
+
+                System.out.println("Invalid Age");
+
+            } else {
+
+                Patient p2 = new Patient(id2, name2, age2, diagnosis2);
+
+                System.out.println("Patient Record Created");
+            }
+
+            // Search patient
+            int searchId = sc.nextInt();
+
+            if (p1.getPatientId() == searchId) {
+
+                System.out.println("Patient Details Displayed");
+
+                p1.displayDetails();
+
+            } else {
+
+                System.out.println("Patient Not Found");
+            }
+        }
+
+        sc.close();
+    }
+}
