@@ -1,0 +1,55 @@
+import java.util.Scanner;
+
+class InvalidAmountException extends Exception {
+    InvalidAmountException(String message) {
+        super(message);
+    }
+}
+
+class InsufficientBalanceException extends Exception {
+    InsufficientBalanceException(String message) {
+        super(message);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter Account Number: ");
+        String accountNumber = sc.nextLine();
+
+        System.out.print("Enter Customer Name: ");
+        String customerName = sc.nextLine();
+
+        System.out.print("Enter Account Balance: ₹");
+        double balance = sc.nextDouble();
+
+        System.out.print("Enter Withdrawal Amount: ₹");
+        double withdrawal = sc.nextDouble();
+
+        try {
+            if (withdrawal <= 0) {
+                throw new InvalidAmountException("Invalid Amount Exception");
+            }
+
+            if (withdrawal > balance) {
+                throw new InsufficientBalanceException(
+                    "Insufficient Balance Exception"
+                );
+            }
+
+            balance = balance - withdrawal;
+            System.out.println("Transaction Successful");
+
+        } catch (InvalidAmountException e) {
+            System.out.println(e.getMessage());
+
+        } catch (InsufficientBalanceException e) {
+            System.out.println(e.getMessage());
+        }
+
+        sc.close();
+    }
+}
