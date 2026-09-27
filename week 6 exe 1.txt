@@ -1,0 +1,23 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Enter an integer:");
+        int num = sc.nextInt();
+
+        try {
+            // Use integer division first to trigger ArithmeticException
+            int check = 1 / num;  
+
+            // If no exception, then calculate reciprocal as double
+            double reciprocal = 1.0 / num;
+            System.out.println("Reciprocal = " + reciprocal);
+        } catch (ArithmeticException e) {
+            System.out.println("ArithmeticException");
+        }
+
+        sc.close();
+    }
+}
