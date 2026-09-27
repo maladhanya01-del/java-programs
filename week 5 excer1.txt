@@ -1,0 +1,160 @@
+import java.util.Scanner;
+
+// Abstract base class
+abstract class Product {
+    protected String productId;
+    protected String productName;
+    protected double price;
+    protected double discount;
+
+    public Product(String productId, String productName, double price, double discount) {
+        this.productId = productId;
+        this.productName = productName;
+        this.price = price;
+        this.discount = discount;
+    }
+
+    // Abstract method to calculate final price
+    public abstract void calculateFinalPrice();
+
+    // Overloaded method: show original price
+    public void calculateFinalPrice(boolean showOriginal) {
+        if (price > 0) {
+            System.out.println("Original Price = ₹" + price);
+        } else {
+            System.out.println("Invalid Product Price");
+        }
+    }
+}
+
+// Electronics category
+class Electronics extends Product {
+    public Electronics(String productId, String productName, double price, double discount) {
+        super(productId, productName, price, discount);
+    }
+
+    @Override
+    public void calculateFinalPrice() {
+        if (price <= 0) {
+            System.out.println("Invalid Product Price");
+            return;
+        }
+        double finalPrice = price - (price * discount / 100);
+        System.out.println("Final Price = ₹" + finalPrice);
+    }
+}
+
+// Home Appliance category
+class HomeAppliance extends Product {
+    public HomeAppliance(String productId, String productName, double price, double discount) {
+        super(productId, productName, price, discount);
+    }
+
+    @Override
+    public void calculateFinalPrice() {
+        if (price <= 0) {
+            System.out.println("Invalid Product Price");
+            return;
+        }
+        double finalPrice = price - (price * discount / 100);
+        System.out.println("Final Price = ₹" + finalPrice);
+    }
+}
+
+// Payment interface
+interface Payment {
+    void pay();
+}
+
+// Implementations of Payment
+class UPI implements Payment {
+    public void pay() {
+        System.out.println("Payment Successful");
+    }
+}
+
+class CreditCard implements Payment {
+    public void pay() {
+        System.out.println("Payment Successful");
+    }
+}
+
+class DebitCard implements Payment {
+    public void pay() {
+        System.out.println("Payment Successful");
+    }
+}
+
+class NetBanking implements Payment {
+    public void pay() {
+        System.out.println("Payment Successful");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        // Input product details
+        System.out.println("Enter Product ID:");
+        String id = sc.nextLine();
+
+        System.out.println("Enter Product Name:");
+        String name = sc.nextLine();
+
+        System.out.println("Enter Product Category (Electronics/Home Appliance):");
+        String category = sc.nextLine().trim();
+
+        System.out.println("Enter Product Price:");
+        double price = sc.nextDouble();
+
+        System.out.println("Enter Discount (%):");
+        double discount = sc.nextDouble();
+        sc.nextLine(); // consume newline
+
+        System.out.println("Enter Payment Mode (UPI/Credit Card/Debit Card/Net Banking):");
+        String mode = sc.nextLine().trim();
+
+        // Normalize category input (remove spaces, lowercase)
+        String categoryNormalized = category.replaceAll("\\s+", "").toLowerCase();
+
+        Product p;
+
+        // Runtime polymorphism: decide category
+        if (categoryNormalized.equals("electronics")) {
+            p = new Electronics(id, name, price, discount);
+        } else if (categoryNormalized.equals("homeappliance")) {
+            p = new HomeAppliance(id, name, price, discount);
+        } else {
+            System.out.println("Invalid Category");
+            sc.close();
+            return;
+        }
+
+        // Calculate final price
+        p.calculateFinalPrice();
+
+        // Payment handling
+        Payment payment;
+        if (mode.equalsIgnoreCase("UPI")) {
+            payment = new UPI();
+        } else if (mode.equalsIgnoreCase("Credit Card")) {
+            payment = new CreditCard();
+        } else if (mode.equalsIgnoreCase("Debit Card")) {
+            payment = new DebitCard();
+        } else if (mode.equalsIgnoreCase("Net Banking")) {
+            payment = new NetBanking();
+        } else {
+            System.out.println("Invalid Payment Mode");
+            sc.close();
+            return;
+        }
+
+        // Execute payment only if price is valid
+        if (price > 0) {
+            payment.pay();
+        }
+
+        sc.close();
+    }
+}
