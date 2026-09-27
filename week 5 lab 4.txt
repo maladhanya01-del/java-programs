@@ -1,0 +1,64 @@
+import java.util.Scanner;
+
+// Payment interface
+interface Payment {
+    void pay();
+}
+
+// UPI implementation
+class UPI implements Payment {
+    public void pay() {
+        System.out.println("UPI Payment Successful");
+    }
+}
+
+// Credit Card implementation
+class CreditCard implements Payment {
+    public void pay() {
+        System.out.println("Credit Card Payment Successful");
+    }
+}
+
+// Debit Card implementation
+class DebitCard implements Payment {
+    public void pay() {
+        System.out.println("Debit Card Payment Successful");
+    }
+}
+
+// Net Banking implementation
+class NetBanking implements Payment {
+    public void pay() {
+        System.out.println("Net Banking Payment Successful");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Enter Payment Mode (UPI/Credit Card/Debit Card/Net Banking):");
+        String mode = sc.nextLine().trim();
+
+        Payment payment;
+
+        // Decide which payment mode to use
+        if (mode.equalsIgnoreCase("UPI")) {
+            payment = new UPI();
+        } else if (mode.equalsIgnoreCase("Credit Card")) {
+            payment = new CreditCard();
+        } else if (mode.equalsIgnoreCase("Debit Card")) {
+            payment = new DebitCard();
+        } else if (mode.equalsIgnoreCase("Net Banking")) {
+            payment = new NetBanking();
+        } else {
+            System.out.println("Invalid Payment Mode");
+            sc.close();
+            return;
+        }
+
+        // Execute payment
+        payment.pay();
+        sc.close();
+    }
+}
