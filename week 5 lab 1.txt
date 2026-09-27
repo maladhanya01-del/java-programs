@@ -1,0 +1,47 @@
+import java.util.Scanner;
+
+class Product {
+    private String productId;
+    private String productName;
+    private double price;
+
+    // Constructor
+    public Product(String productId, String productName, double price) {
+        this.productId = productId;
+        this.productName = productName;
+        this.price = price;
+    }
+
+    // Method to display product details
+    public void displayProduct() {
+        if (price > 0) {
+            System.out.println("Product Details Displayed");
+        } else {
+            System.out.println("Invalid Product Price");
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        // Input product details
+        System.out.println("Enter Product ID:");
+        String id = sc.nextLine();
+
+        System.out.println("Enter Product Name:");
+        String name = sc.nextLine();
+
+        System.out.println("Enter Product Price:");
+        double price = sc.nextDouble();
+
+        // Create Product object
+        Product p = new Product(id, name, price);
+
+        // Display product info
+        p.displayProduct();
+
+        sc.close();
+    }
+}
