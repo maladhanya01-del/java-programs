@@ -1,0 +1,88 @@
+import java.util.Scanner;
+
+// Base class
+class Product {
+    protected String productId;
+    protected String productName;
+    protected double price;
+
+    public Product(String productId, String productName, double price) {
+        this.productId = productId;
+        this.productName = productName;
+        this.price = price;
+    }
+
+    public void displayInfo() {
+        if (price > 0) {
+            System.out.println("Generic Product Displayed");
+        } else {
+            System.out.println("Invalid Product Price");
+        }
+    }
+}
+
+// Electronics subclass
+class Electronics extends Product {
+    public Electronics(String productId, String productName, double price) {
+        super(productId, productName, price);
+    }
+
+    @Override
+    public void displayInfo() {
+        if (price > 0) {
+            System.out.println("Electronics Product Displayed");
+        } else {
+            System.out.println("Invalid Product Price");
+        }
+    }
+}
+
+// HomeAppliance subclass
+class HomeAppliance extends Product {
+    public HomeAppliance(String productId, String productName, double price) {
+        super(productId, productName, price);
+    }
+
+    @Override
+    public void displayInfo() {
+        if (price > 0) {
+            System.out.println("Home Appliance Product Displayed");
+        } else {
+            System.out.println("Invalid Product Price");
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Enter Product ID:");
+        String id = sc.nextLine();
+
+        System.out.println("Enter Product Name:");
+        String name = sc.nextLine();
+
+        System.out.println("Enter Product Category (Electronics/Home Appliance):");
+        String category = sc.nextLine().trim();  // trim removes extra spaces
+
+        System.out.println("Enter Product Price:");
+        double price = sc.nextDouble();
+
+        Product p;
+
+        // Ensure proper category matching
+        if (category.equalsIgnoreCase("Electronics")) {
+            p = new Electronics(id, name, price);
+        } else if (category.equalsIgnoreCase("Home Appliance")) {
+            p = new HomeAppliance(id, name, price);
+        } else {
+            System.out.println("Invalid Category");
+            sc.close();
+            return;
+        }
+
+        p.displayInfo();
+        sc.close();
+    }
+}
