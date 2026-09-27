@@ -1,0 +1,31 @@
+import java.util.Scanner;
+
+public class Main{
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        // Input size of array
+        System.out.println("Enter size of array (N):");
+        int N = sc.nextInt();
+
+        int[] arr = new int[N];
+
+        // Fill array with sample values (e.g., index+1)
+        for (int i = 0; i < N; i++) {
+            arr[i] = i + 1;
+        }
+
+        // Input index to access
+        System.out.println("Enter index to access:");
+        int index = sc.nextInt();
+
+        try {
+            int element = arr[index];  // may throw exception
+            System.out.println("Element Displayed Successfully");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("ArrayIndexOutOfBoundsException");
+        }
+
+        sc.close();
+    }
+}
